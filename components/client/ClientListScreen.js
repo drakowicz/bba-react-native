@@ -1,0 +1,84 @@
+import React from 'react';
+import { FlatList, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { Divider, List, TouchableRipple, withTheme } from 'react-native-paper';
+
+class ClientListScreen extends React.Component {
+  static navigationOptions = {
+    title: "Clients",
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+      data: []
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(function () {
+      if (this.state.isLoading) {
+        this.setState({
+          isLoading: false,
+          data: _testClients,
+        });
+      }
+    }.bind(this), 750);
+  }
+
+  render() {
+    const { colors } = this.props.theme;
+    if (this.state.isLoading) {
+      return (
+        <View style={[styles.empty, { backgroundColor: colors.background }]}>
+          <ActivityIndicator size='large' />
+        </View>
+      )
+    }
+    return (
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <FlatList
+          data={this.state.data}
+          renderItem={this._renderItem}
+          ItemSeparatorComponent={() => <Divider />}
+        />
+      </View>
+    );
+  }
+
+  _renderItem = ({ item }) => (
+    <TouchableRipple onPress={() => this._itemPressed(item.id)} >
+      <List.Item
+        title={item.name}
+        description={item.phone}
+        left={(props) => <List.Icon {...props} icon="person" />}
+        right={(props) => <List.Icon {...props} icon="chevron-right" />}
+      />
+    </TouchableRipple>
+  );
+
+  _itemPressed(clientId) {
+    console.log('pressed');
+    this.props.navigation.navigate('ClientDetail', { id: clientId });
+  }
+}
+
+const _testClients = [
+  { key: '11', name: 'Customer 1', phone: '(111) 123-4444' },
+  { key: '12', name: 'Customer 2', phone: '(111) 123-4444' },
+  { key: '13', name: 'Customer 3', phone: '(111) 123-4444' },
+  { key: '14', name: 'Customer 4', phone: '(111) 123-4444' },
+  { key: '15', name: 'Customer 5', phone: '(111) 123-4444' },
+]
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  empty: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
+
+export default withTheme(ClientListScreen);

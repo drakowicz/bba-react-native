@@ -1,6 +1,6 @@
 import React from 'react';
-import { AsyncStorage, StyleSheet, View } from 'react-native';
-import { Button, Text, TextInput, withTheme } from 'react-native-paper';
+import { AsyncStorage, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { Button, TextInput, withTheme } from 'react-native-paper';
 
 class AuthScreen extends React.Component {
   static title = 'Login';
@@ -19,13 +19,17 @@ class AuthScreen extends React.Component {
   render() {
     const { colors } = this.props.theme;
     return (
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <TextInput style={styles.input} label='Email' placeholder={'email'} value={this.state.username} onChangeText={(value) => { this.setState({ username: value }) }} />
-        <TextInput secureTextEntry={true} style={styles.input} label='Password' value={this.state.password} placeholder={'password'} onChangeText={(value) => { this.setState({ password: value }) }} />
-        <View style={styles.btnView}>
-          <Button style={styles.button} mode='contained' onPress={this.loginAsync}>Login</Button>
-        </View>
-      </View>
+      <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+        <KeyboardAvoidingView style={{ flex: 1, padding: 50 }} behavior='padding' enabled  >
+          <ScrollView style={{ flex: 1 }}>
+            <TextInput style={styles.input} autoCorrect={false} label='Email' placeholder={'email'} value={this.state.username} onChangeText={(value) => { this.setState({ username: value }) }} />
+            <TextInput secureTextEntry={true} autoCorrect={false} style={styles.input} label='Password' value={this.state.password} placeholder={'password'} onChangeText={(value) => { this.setState({ password: value }) }} />
+            <View style={styles.btnView}>
+              <Button style={styles.button} mode='contained' onPress={this.loginAsync}>Login</Button>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 
@@ -39,9 +43,7 @@ class AuthScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    paddingTop: 50,
-    padding: 14,
+    padding: 20,
   },
   input: {
     marginBottom: 14,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
 import { Divider, List, TouchableRipple, withTheme } from 'react-native-paper';
 
 class ClientListScreen extends React.Component {
@@ -9,16 +9,24 @@ class ClientListScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
+      isRefreshing: true,
+      initLoad: true,
       data: []
     };
   }
 
   componentDidMount() {
+    this._onRefresh();
+  }
+
+  _onRefresh = () => {
+    isRefreshing: true,
+      this.setState({ isRefreshing: true });
     setTimeout(function () {
-      if (this.state.isLoading) {
+      if (this.state.isRefreshing) {
         this.setState({
-          isLoading: false,
+          isRefreshing: false,
+          initLoad: false,
           data: _testClients,
         });
       }
@@ -27,7 +35,7 @@ class ClientListScreen extends React.Component {
 
   render() {
     const { colors } = this.props.theme;
-    if (this.state.isLoading) {
+    if (this.state.initLoad) {
       return (
         <View style={[styles.empty, { backgroundColor: colors.background }]}>
           <ActivityIndicator size='large' />
@@ -35,13 +43,20 @@ class ClientListScreen extends React.Component {
       )
     }
     return (
-      <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <FlatList
-          data={this.state.data}
-          renderItem={this._renderItem}
-          ItemSeparatorComponent={() => <Divider />}
-        />
-      </View>
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
+          <FlatList
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.isRefreshing}
+                onRefresh={this._onRefresh} />
+            }
+            data={this.state.data}
+            renderItem={this._renderItem}
+            ItemSeparatorComponent={() => <Divider />}
+          />
+        </View>
+      </SafeAreaView>
     );
   }
 

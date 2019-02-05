@@ -8,6 +8,8 @@ import HomeScreen from '../components/HomeScreen';
 import AuthLoadingScreen from '../components/login/AuthLoadingScreen';
 import AuthScreen from '../components/login/AuthScreen';
 import MonthScreen from '../components/calendar/MonthScreen';
+import WeekScreen from '../components/calendar/WeekScreen';
+import AgendaScreen from '../components/calendar/AgendaScreen';
 
 
 const _navOptionsBack = ({ navigation, navigationOptions }) => ({
@@ -50,7 +52,15 @@ const CalendarStack = createStackNavigator(
     Calendar: {
       screen: MonthScreen,
       navigationOptions: _navOptions,
-    }
+    },
+    Week: {
+      screen: WeekScreen,
+      navigationOptions: _navOptionsBack,
+    },
+    Agenda: {
+      screen: AgendaScreen,
+      navigationOptions: _navOptionsBack,
+    },
   },
   {
     navigationOptions: ({

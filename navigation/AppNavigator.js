@@ -10,6 +10,7 @@ import AuthScreen from '../components/login/AuthScreen';
 import MonthScreen from '../components/calendar/MonthScreen';
 import WeekScreen from '../components/calendar/WeekScreen';
 import AgendaScreen from '../components/calendar/AgendaScreen';
+import ExpenseFormScreen from '../components/expense/ExpenseFormScreen';
 
 
 const _navOptionsBack = ({ navigation, navigationOptions }) => ({
@@ -42,6 +43,23 @@ const HomeStack = createStackNavigator(
       tabBarLabel: 'Home',
       tabBarIcon: ({ focused, horizontal }) => (
         <TabBarIcon iconName='home' focused={focused} />
+      ),
+    }),
+  }
+);
+
+const ExpenseStack = createStackNavigator(
+  {
+    Expense: {
+      screen: ExpenseFormScreen,
+      navigationOptions: _navOptions,
+    }
+  },
+  {
+    navigationOptions: ({
+      tabBarLabel: 'Expense',
+      tabBarIcon: ({ focused, horizontal }) => (
+        <TabBarIcon iconName='briefcase' focused={focused} />
       ),
     }),
   }
@@ -103,6 +121,7 @@ const AuthStack = createStackNavigator({
 const AppStack = createBottomTabNavigator({
   HomeStack,
   CalendarStack,
+  ExpenseStack,
   ClientStack,
 });
 

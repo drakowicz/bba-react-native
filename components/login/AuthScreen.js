@@ -3,7 +3,6 @@ import { AsyncStorage, KeyboardAvoidingView, SafeAreaView, ScrollView, StyleShee
 import { Button, TextInput, withTheme } from 'react-native-paper';
 
 class AuthScreen extends React.Component {
-  static title = 'Login';
   static navigationOptions = {
     title: 'Login',
   };

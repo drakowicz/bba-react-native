@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ActivityIndicator, Dimensions, StyleSheet, View } from 'react-native';
+import { ScrollView, ActivityIndicator, Dimensions, StyleSheet, View } from 'react-native';
 import { Button, TextInput, TouchableRipple, Text, withTheme, RadioButton } from 'react-native-paper';
 
 class ClientDetailScreen extends React.Component {
@@ -27,35 +27,37 @@ class ClientDetailScreen extends React.Component {
     const { isLoading } = this.state;
 
     return (
-      <View onLayout={this.layoutChange} style={[styles.container, { backgroundColor: colors.background }]}>
-        <ActivityIndicator animating={isLoading} size='large' />
-        {/* {isLoading && (<ActivityIndicator size='large' />)} */}
-        <TextInput style={styles.input} value={this.state.name} label='Name' placeholder="Name" onChangeText={(value) => this.setState({ name: value })} />
-        <TextInput style={styles.input} value={this.state.lastName} label='Last Name' placeholder="Last Name" onChangeText={(value) => this.setState({ lastName: value })} />
-        <TextInput style={styles.input} value={this.state.phone} label='Phone' placeholder="Phone" onChangeText={(value) => this.setState({ phone: value })} />
-        <TextInput style={styles.input} value={this.state.wphone} label='Work Phone' placeholder="Work Phone" onChangeText={(value) => this.setState({ wphone: value })} />
-        <TextInput style={styles.input} value={this.state.hphone} label='Home Phone' placeholder="Home Phone" onChangeText={(value) => this.setState({ hphone: value })} />
-        <TextInput style={styles.input} value={this.state.email} label='Email' placeholder="Email" onChangeText={(value) => this.setState({ email: value })} />
-        <RadioButton.Group value={this.state.gender} onValueChange={value => this.setState({ gender: value })}>
-          <View style={styles.radio}>
+      <ScrollView>
+        <View onLayout={this.layoutChange} style={[styles.container, { backgroundColor: colors.background }]}>
+          <ActivityIndicator animating={isLoading} size='large' />
+          {/* {isLoading && (<ActivityIndicator size='large' />)} */}
+          <TextInput style={styles.input} value={this.state.name} label='Name' placeholder="Name" onChangeText={(value) => this.setState({ name: value })} />
+          <TextInput style={styles.input} value={this.state.lastName} label='Last Name' placeholder="Last Name" onChangeText={(value) => this.setState({ lastName: value })} />
+          <TextInput style={styles.input} value={this.state.phone} label='Phone' placeholder="Phone" onChangeText={(value) => this.setState({ phone: value })} />
+          <TextInput style={styles.input} value={this.state.wphone} label='Work Phone' placeholder="Work Phone" onChangeText={(value) => this.setState({ wphone: value })} />
+          <TextInput style={styles.input} value={this.state.hphone} label='Home Phone' placeholder="Home Phone" onChangeText={(value) => this.setState({ hphone: value })} />
+          <TextInput style={styles.input} value={this.state.email} label='Email' placeholder="Email" onChangeText={(value) => this.setState({ email: value })} />
+          <RadioButton.Group value={this.state.gender} onValueChange={value => this.setState({ gender: value })}>
             <View style={styles.radio}>
-              <Text>Female</Text>
-              <RadioButton value='F' />
+              <View style={styles.radio}>
+                <Text>Female</Text>
+                <RadioButton value='F' />
+              </View>
+              <View style={styles.radio}>
+                <Text>Male</Text>
+                <RadioButton value='M' />
+              </View>
             </View>
-            <View style={styles.radio}>
-              <Text>Male</Text>
-              <RadioButton value='M' />
-            </View>
-          </View>
-        </RadioButton.Group>
-        <TextInput style={styles.input} value={this.state.occupation} label='Occupation' placeholder="Occupation" onChangeText={(value) => this.setState({ occupation: value })} />
+          </RadioButton.Group>
+          <TextInput style={styles.input} value={this.state.occupation} label='Occupation' placeholder="Occupation" onChangeText={(value) => this.setState({ occupation: value })} />
 
-        <View style={styles.btnView}>
-          <TouchableRipple style={styles.submitButton} onPress={() => console.log("click")}>
-            <Button style={styles.button} mode='contained' onPress={this.saveAsync}>Save</Button>
-          </TouchableRipple>
+          <View style={styles.btnView}>
+            <TouchableRipple style={styles.submitButton} onPress={() => console.log("click")}>
+              <Button style={styles.button} mode='contained' onPress={this.saveAsync}>Save</Button>
+            </TouchableRipple>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 

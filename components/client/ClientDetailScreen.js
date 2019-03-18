@@ -38,9 +38,9 @@ class ClientDetailScreen extends React.Component {
             {/* {isLoading && (<ActivityIndicator size='large' />)} */}
             <TextInput style={styles.input} value={this.state.name} label='Name' placeholder="Name" onChangeText={(value) => this.setState({ name: value })} />
             <TextInput style={styles.input} value={this.state.lastName} label='Last Name' placeholder="Last Name" onChangeText={(value) => this.setState({ lastName: value })} />
-            <TextInput style={styles.input} value={this.state.phone} label='Phone' placeholder="Phone" onChangeText={(value) => this.setState({ phone: value })} />
-            <TextInput style={styles.input} value={this.state.wphone} label='Work Phone' placeholder="Work Phone" onChangeText={(value) => this.setState({ wphone: value })} />
-            <TextInput style={styles.input} value={this.state.hphone} label='Home Phone' placeholder="Home Phone" onChangeText={(value) => this.setState({ hphone: value })} />
+            <TextInput style={styles.input} value={this.state.phone} label='Phone' placeholder="Phone" keyboardType='numeric' onChangeText={(value) => this.setState({ phone: value })} />
+            <TextInput style={styles.input} value={this.state.wphone} label='Work Phone' placeholder="Work Phone" keyboardType='numeric' onChangeText={(value) => this.setState({ wphone: value })} />
+            <TextInput style={styles.input} value={this.state.hphone} label='Home Phone' placeholder="Home Phone" keyboardType='numeric' onChangeText={(value) => this.setState({ hphone: value })} />
             <TextInput style={styles.input} value={this.state.email} label='Email' placeholder="Email" onChangeText={(value) => this.setState({ email: value })} />
             <RadioButton.Group value={this.state.gender} onValueChange={value => this.setState({ gender: value })}>
               <View style={styles.radio}>

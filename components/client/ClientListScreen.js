@@ -1,13 +1,28 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, SafeAreaView, StyleSheet, View, Button, Text } from 'react-native';
 import { Divider, List, TouchableRipple, withTheme } from 'react-native-paper';
-import ActionButton, { ActionButtonItem } from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 class ClientListScreen extends React.Component {
   static navigationOptions = {
-    title: "Clients",
+    title: 'Clients',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    
+    headerRight: (
+      <Button
+        onPress={() => alert('This is a button!')}
+        title="Info"
+        color="#fff"
+      />
+    ),
   };
+ 
   constructor(props) {
     super(props);
     this.state = {
@@ -57,11 +72,6 @@ class ClientListScreen extends React.Component {
             renderItem={this._renderItem}
             ItemSeparatorComponent={() => <Divider />}
           />
-          <ActionButton buttonColor="rgba(231,76,60,1)">
-            <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => console.log("Tapped")}>
-              <Icon name="New" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
-          </ActionButton>
         </View>
       </SafeAreaView>
     );
@@ -100,11 +110,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  actionButtonIcon: {
-    fontSize: 20,
-    height: 22,
-    color: 'white',
   },
 });
 

@@ -20,7 +20,8 @@
     "xdate": "^0.8.2"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.2.0"
+    "babel-preset-expo": "^5.2.0",
+    "expo-google-sign-in": "^2.0.0"
   },
   "private": true
 }

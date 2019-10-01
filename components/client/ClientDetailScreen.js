@@ -1,8 +1,8 @@
-
 import React from 'react';
 import { ScrollView, ActivityIndicator, Dimensions, StyleSheet, View } from 'react-native';
 import { Button, TextInput, TouchableRipple, Text, withTheme, RadioButton } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { RadioGroup } from 'react-native-radio-buttons-group';
 
 class ClientDetailScreen extends React.Component {
   constructor(props) {
@@ -23,9 +23,24 @@ class ClientDetailScreen extends React.Component {
     }.bind(this), 1000);
   }
 
+    //Button item label
+    state = { 
+      data: [
+        { label: 'Male'   },
+        { label: 'Femlae' },
+      ],
+    };
+  
+    // update state
+    onPress = data => this.setState ({ data });
+
   render() {
     const { colors } = this.props.theme;
     const { isLoading } = this.state;
+
+    let selectedBotton = this.state.data.find(e => e.selected == true);
+    selectedButton = selectedButton ? selectedButton.value : this.state.data[0].label;
+            
 
     return (
       <KeyboardAwareScrollView contentContainerStyle={styles.container}
@@ -42,6 +57,19 @@ class ClientDetailScreen extends React.Component {
             <TextInput style={styles.input} value={this.state.wphone} keyboardType='numeric' label='Work Phone' placeholder="Work Phone" onChangeText={(value) => this.setState({ wphone: value })} />
             <TextInput style={styles.input} value={this.state.hphone} keyboardType='numeric' label='Home Phone' placeholder="Home Phone" onChangeText={(value) => this.setState({ hphone: value })} />
             <TextInput style={styles.input} value={this.state.email} label='Email' placeholder="Email" onChangeText={(value) => this.setState({ email: value })} />
+            
+            <View style={styles.container}>
+                <Text style={styles.valueText}>
+                    Value = {selectedButton}
+                </Text>
+                <RadioGroup 
+                  radioButtons={this.state.data} 
+                  onPress={this.onPress} 
+                  flexDirection='row'
+                  />
+            </View>
+            
+            {/*
             <RadioButton.Group value={this.state.gender} onValueChange={value => this.setState({ gender: value })}>
               <View style={styles.radio}>
                 <View style={styles.radio}>
@@ -54,6 +82,7 @@ class ClientDetailScreen extends React.Component {
                 </View>
               </View>
             </RadioButton.Group>
+            */}
             <TextInput style={styles.input} value={this.state.occupation} label='Occupation' placeholder="Occupation" onChangeText={(value) => this.setState({ occupation: value })} />
 
             <View style={styles.btnView}>
@@ -89,7 +118,9 @@ const _testUser = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 14,
+    //padding: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   input: {
     marginBottom: 14,
@@ -102,8 +133,16 @@ const styles = StyleSheet.create({
     // width: '50%',
     // marginRight: 14,
   },
-  radio: {
-    // flex: .5,
+  valueText: {
+    fontSize: 18,
+    marginBottom: 50,
+  }
+});
+
+
+{/*
+radio: {
+     // flex: .5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -111,6 +150,6 @@ const styles = StyleSheet.create({
     // width: '30%',
     marginBottom: 7,
   },
-});
+*/}
 
 export default withTheme(ClientDetailScreen);

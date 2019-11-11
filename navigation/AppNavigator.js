@@ -1,6 +1,6 @@
 import React from 'react';
 import { Appbar } from 'react-native-paper';
-import { createAppContainer, createBottomTabNavigator, createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createBottomTabNavigator, createStackNavigator, createSwitchNavigator } from 'react-navigation-stack';
 import ClientDetailScreen from '../components/client/ClientDetailScreen';
 import ClientListScreen from '../components/client/ClientListScreen';
 import TabBarIcon from '../components/common/TabBarIcon';

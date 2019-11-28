@@ -1,11 +1,28 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, RefreshControl, SafeAreaView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, SafeAreaView, StyleSheet, View, Button, Text } from 'react-native';
 import { Divider, List, TouchableRipple, withTheme } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class ClientListScreen extends React.Component {
   static navigationOptions = {
-    title: "Clients",
+    title: 'Clients',
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    
+    headerRight: (
+      <Button
+        onPress={() => alert('This is a button!')}
+        title="Info"
+        color="#fff"
+      />
+    ),
   };
+ 
   constructor(props) {
     super(props);
     this.state = {
@@ -93,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
 
 export default withTheme(ClientListScreen);
